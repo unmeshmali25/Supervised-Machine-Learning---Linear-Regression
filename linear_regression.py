@@ -49,3 +49,14 @@ plt.plot(boston_df.RM, boston_df.Price, 'o')
 x = boston_df.RM
 plt.plot(x, m*x+b, label = "Best Fit Line")
 
+
+# Calculating the Root Mean Square Error (It is approximately equal to standard deviation) 
+result = np.linalg.lstsq(X,Y)
+
+error_total = result[1]
+
+rmse = np.sqrt(error_total/len(X))
+print('The root mean square error was %.2f' %rmse)
+
+
+
