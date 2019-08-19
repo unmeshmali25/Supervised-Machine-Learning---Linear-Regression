@@ -60,3 +60,27 @@ print('The root mean square error was %.2f' %rmse)
 
 
 
+# NOW...
+# Using sklearn to perform linear regression (uni and multivariate)
+import sklearn
+from sklearn.linear_model import LinearRegression
+lreg = LinearRegression()
+
+X_multi = boston_df.drop('Price',1)
+Y_target = boston_df.Price
+
+lreg.fit(X_multi,Y_target)
+
+print('The estimated intercept coefficient is %.2f' %lreg.intercept_)
+print('The number of coefficients used was %d' %len(lreg.coef_))
+
+# To tabulate all the variables vs their coefficient estimate from the fit model
+coeff_df = DataFrame(boston_df.columns)
+coeff_df.columns = ['Features']
+coeff_df['oefficient Estimate'] = Series(lreg.coef_)
+
+
+
+
+
+
