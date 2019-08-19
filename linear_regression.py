@@ -80,7 +80,16 @@ coeff_df.columns = ['Features']
 coeff_df['oefficient Estimate'] = Series(lreg.coef_)
 
 
+# Using sklearn for prediction model (Training and Validation)
+X_train, X_test, Y_train, Y_test = sklearn.model_selection.train_test_split(X, boston_df.Price)
 
+pred_train = lreg.predict(X_train)
+pred_test = lreg.predict(X_test)
+print("Fit a model X_train, and calculate the MSE with Y_train: %.2f" %np.mean((Y_train-pred_train)**2))
 
+# Checking the residual plot to see if linear regression model was a right fit
+train = plt.scatter(pred_train, (pred_train - Y_train), c = 'b', alpha = 0.5)
+
+test = plt.scatter(pred_test, (pred_test- Y_test), c = 'r', alpha = 0.5)
 
 
