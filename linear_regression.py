@@ -34,3 +34,18 @@ boston_df['Price'] = boston.target
 sns.lmplot('RM', 'Price', data = boston_df)
 
 
+# Using Numpy to find the best fit line for the dataset
+X = boston_df.RM
+X = np.vstack(boston_df.RM)
+X = np.array([[value, 1] for value in X])
+
+Y = boston_df.Price
+m , b = np.linalg.lstsq(X,Y)[0]
+
+# Creating a scatter plot
+plt.plot(boston_df.RM, boston_df.Price, 'o')
+
+# Plotting the best fit line from least square method
+x = boston_df.RM
+plt.plot(x, m*x+b, label = "Best Fit Line")
+
