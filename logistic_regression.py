@@ -56,3 +56,23 @@ X = pd.concat([X, dummies], axis = 1)
 # Creating the target variable
 Y = df.Had_Affair
 
+
+
+# Dealing with multi-collinearity arising due to the dummy variables
+# Dropping a few columns like occ1, hocc1, affairs
+
+X = X.drop('affairs', axis = 1)
+X = X.drop('occ1', axis = 1)
+X = X.drop('hocc1', axis = 1)
+
+# Converting Y into a flat array to fit into regression model
+Y = np.ravel(Y)
+
+# Fitting the data into a logaritmic regression
+log_model = LogisticRegression()
+log_model.fit(X,Y)
+log_model.score(X,Y)
+
+# Checking coefficients 
+coeff_df = DataFrame(zip(X.columns, np.transpose(log_model.coef_)))
+
