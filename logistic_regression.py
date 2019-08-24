@@ -76,3 +76,15 @@ log_model.score(X,Y)
 # Checking coefficients 
 coeff_df = DataFrame(zip(X.columns, np.transpose(log_model.coef_)))
 
+
+# Splitting the dataset into test and training set to check the accuracy of our model
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y)
+
+log_model2 = LogisticRegression()
+
+log_model2.fit(X_train, Y_train)
+
+class_predict = log_model2.predict(X_test)
+print(metrics.accuracy_score(Y_test, class_predict))
+
+
