@@ -36,3 +36,23 @@ sns.catplot('children', data = df, hue = 'Had_Affair', kind = 'count')
 
 sns.catplot('educ', data = df, hue = 'Had_Affair', kind = 'count')
 
+# Data preparation for logistic regression
+occ_dummies = pd.get_dummies(df['occupation'])
+hus_occ_dummies = pd.get_dummies(df['occupation_husb'])
+
+occ_dummies.columns = ['occ1', 'occ2', 'occ3', 'occ4', 'occ5', 'occ6']
+occ_dummies.head()
+
+hus_occ_dummies.columns = ['hocc1', 'hocc2', 'hocc3', 'hocc4', 'hocc5', 'hocc6']
+hus_occ_dummies.head()
+
+X = df.drop(['occupation', 'occupation_husb', 'Had_Affair'], axis = 1)
+
+dummies = pd.concat([occ_dummies, hus_occ_dummies], axis = 1)
+dummies.head()
+
+X = pd.concat([X, dummies], axis = 1)
+
+# Creating the target variable
+Y = df.Had_Affair
+
